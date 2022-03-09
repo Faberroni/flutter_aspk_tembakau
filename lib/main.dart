@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
-              child: const Text("Decrement Counter"),
+              child: const Icon(Icons.remove),
               onPressed: _decrementCounter,
             ),
             const Text(

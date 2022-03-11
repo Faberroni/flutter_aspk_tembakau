@@ -53,14 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() => _counter--);
   }
   void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+    setState(() => _counter++);
   }
 
   @override
@@ -71,11 +64,18 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            ElevatedButton(
-              child: const Icon(Icons.remove),
-              onPressed: _decrementCounter,
+            Row(
+              children: <Widget>[
+                ElevatedButton(
+                  child: const Icon(Icons.remove),
+                  onPressed: _decrementCounter,
+                  ),
+                ElevatedButton(
+                  child: const Icon(Icons.add),
+                  onPressed: _incrementCounter)
+              ],
             ),
             const Text(
               'You have pushed the button this many times:',

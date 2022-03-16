@@ -1,3 +1,6 @@
+// ignore_for_file: file_names
+
+//Halaman home buat aplikasi penggudangan
 import 'package:flutter/material.dart';
 
 

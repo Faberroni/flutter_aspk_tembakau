@@ -8,25 +8,23 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  static const String _title = "Proyek ASPK";
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'ASPK Flutter',
+      title: _title,
       theme: ThemeData(
-      fontFamily: 'Roboto',
-      colorScheme: ColorScheme.fromSwatch(
-        primarySwatch: Colors.blue,
+        fontFamily: 'Roboto',
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: Colors.blue,
         ).copyWith(
           secondary: Colors.green,
         ),
-        backgroundColor: Colors.lightBlue,
-        textTheme: const TextTheme(bodyText2: TextStyle(color: Colors.purple)),
-        
+        backgroundColor: Colors.white,
+        textTheme: const TextTheme(bodyText2: TextStyle(color: Colors.black)),
       ),
-      
       home: const MyHomePage(title: 'ASPK Flutter'),
     );
   }
 }
-

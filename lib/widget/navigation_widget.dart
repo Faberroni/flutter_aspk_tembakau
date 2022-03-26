@@ -12,6 +12,8 @@ class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
       currentIndex: currentIndex,
       onTap: (index) => setState(() => currentIndex = index),
       items: const [

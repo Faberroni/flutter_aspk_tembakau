@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'Page/home_page.dart';
+import 'Page/register_page.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         backgroundColor: Colors.white,
         textTheme: const TextTheme(bodyText2: TextStyle(color: Colors.black)),
       ),
-      home: const MyHomePage(title: 'ASPK Flutter'),
+      home: const RegisterPage(),
     );
   }
 }

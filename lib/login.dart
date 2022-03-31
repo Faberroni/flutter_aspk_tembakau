@@ -42,7 +42,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 child: const Text(
                   'Tembakau Profil',
                   style: TextStyle(
-                      color: Colors.blue,
+                      color: Colors.orange,
                       fontWeight: FontWeight.w500,
                       fontSize: 30),
                 )),

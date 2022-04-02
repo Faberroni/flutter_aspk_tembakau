@@ -29,8 +29,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Login")),
+      appBar: AppBar(title: const Text("Login")),
       body: Column(
         children: [
           TextField(
@@ -53,9 +52,14 @@ class _LoginPageState extends State<LoginPage> {
               final email = _email.text;
               final password = _password.text;
               try {
-                final userCredential = await FirebaseAuth.instance
-                    .signInWithEmailAndPassword(email: email, password: password);
-                print(userCredential);
+                    await FirebaseAuth.instance.signInWithEmailAndPassword(
+                  email: email,
+                  password: password,
+                );
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/inventory/',
+                  (route) => false,
+                );
               } on FirebaseAuthException catch (e) {
                 print('terjadi kesalahan');
               }

@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_aspk_tembakau/Page/login_page.dart';
 import 'package:flutter_aspk_tembakau/Page/register_page.dart';
 import 'package:flutter_aspk_tembakau/Page/verify_email_page.dart';
+import 'package:flutter_aspk_tembakau/constants/route.dart';
 import 'package:flutter_aspk_tembakau/firebase_options.dart';
 
 void main() {
@@ -32,9 +33,9 @@ class MyApp extends StatelessWidget {
       ),
       home: const HomePage(),
       routes: {
-        '/login/': (context) => const LoginPage(),
-        '/register/': (context) => const RegisterPage(),
-        '/inventory/': (context) => const InventoryPage(),
+        loginRoute: (context) => const LoginPage(),
+        registerRoute: (context) => const RegisterPage(),
+        inventoryRoute: (context) => const InventoryPage(),
       },
     );
   }

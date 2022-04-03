@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_aspk_tembakau/constants/route.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -57,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                   password: password,
                 );
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                  '/inventory/',
+                  inventoryRoute,
                   (route) => false,
                 );
               } on FirebaseAuthException catch (e) {
@@ -69,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
           TextButton(
               onPressed: () {
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                  '/register/',
+                  registerRoute,
                   (route) => false,
                 );
               },

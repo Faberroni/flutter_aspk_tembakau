@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_aspk_tembakau/constants/route.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -52,9 +53,11 @@ class _RegisterPageState extends State<RegisterPage> {
               final email = _email.text;
               final password = _password.text;
               try {
-                final userCredential = await FirebaseAuth.instance
-                    .createUserWithEmailAndPassword(
-                        email: email, password: password);
+                final userCredential =
+                    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                  email: email,
+                  password: password,
+                );
                 print(userCredential);
               } on FirebaseAuthException catch (e) {
                 print("Terjadi kesalahan....");
@@ -65,7 +68,7 @@ class _RegisterPageState extends State<RegisterPage> {
           TextButton(
               onPressed: () {
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                  '/login/',
+                  loginRoute,
                   (route) => false,
                 );
               },

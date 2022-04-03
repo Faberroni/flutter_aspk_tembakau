@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
         loginRoute: (context) => const LoginPage(),
         registerRoute: (context) => const RegisterPage(),
         inventoryRoute: (context) => const InventoryPage(),
+        verifyEmailRoute :(context) => const VerifyEmailPage(),
       },
     );
   }
@@ -113,24 +114,28 @@ class _InventoryPageState extends State<InventoryPage> {
 
 Future<bool> showLogooutDialogue(BuildContext context) {
   return showDialog<bool>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-            title: const Text('Log out'),
-            content: const Text('Keluar dari aplikasi?'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(false);
-                },
-                child: const Text('Tidak'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(true);
-                },
-                child: const Text('Iya'),
-              ),
-            ]);
-      }).then((value) => value ?? false);
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text('Log out'),
+        content: const Text('Keluar dari aplikasi?'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            },
+            child: const Text('Tidak'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(true);
+            },
+            child: const Text('Iya'),
+          ),
+        ],
+      );
+    },
+  ).then(
+    (value) => value ?? false,
+  );
 }

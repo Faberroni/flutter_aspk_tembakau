@@ -1,6 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_aspk_tembakau/constants/route.dart';
+import 'package:flutter_aspk_tembakau/services/auth/auth_service.dart';
 
 class VerifyEmailPage extends StatefulWidget {
   const VerifyEmailPage({Key? key}) : super(key: key);
@@ -20,14 +20,13 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
             "Jika belum mendapatkan email klik dibawah untuk mengirimkannya kembali"),
         TextButton(
           onPressed: () async {
-            final user = FirebaseAuth.instance.currentUser;
-            await user?.sendEmailVerification();
+            await AuthService.firebase().sendEmailVerification();
           },
           child: const Text('Kirim email verifikasi'),
         ),
         TextButton(
           onPressed: () async {
-            await FirebaseAuth.instance.signOut();
+            await AuthService.firebase().logOut();
             Navigator.of(context).pushNamedAndRemoveUntil(
               registerRoute,
               (route) => false,

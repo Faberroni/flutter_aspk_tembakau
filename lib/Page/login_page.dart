@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_aspk_tembakau/constants/route.dart';
 import 'package:flutter_aspk_tembakau/functions/show_error_dialogue.dart';
+import 'package:flutter_aspk_tembakau/services/auth/auth_exceptions.dart';
+import 'package:flutter_aspk_tembakau/services/auth/auth_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -54,12 +55,10 @@ class _LoginPageState extends State<LoginPage> {
               final email = _email.text;
               final password = _password.text;
               try {
-                await FirebaseAuth.instance.signInWithEmailAndPassword(
-                  email: email,
-                  password: password,
-                );
-                final user = FirebaseAuth.instance.currentUser;
-                if (user?.emailVerified ?? false) {
+                await AuthService.firebase()
+                    .logIn(email: email, password: password);
+                final user = AuthService.firebase().currentUser;
+                if (user?.isEmailVerified ?? false) {
                   Navigator.of(context).pushNamedAndRemoveUntil(
                     inventoryRoute,
                     (route) => false,
@@ -70,27 +69,20 @@ class _LoginPageState extends State<LoginPage> {
                     (route) => false,
                   );
                 }
-              } on FirebaseAuthException catch (e) {
-                if (e.code == 'user-not-found') {
-                  await showErrorDialog(
-                    context,
-                    'User tidak ada',
-                  );
-                } else if (e.code == 'wrong-password') {
-                  await showErrorDialog(
-                    context,
-                    'Password salah',
-                  );
-                } else {
-                  await showErrorDialog(
-                    context,
-                    'Error: ${e.code}',
-                  );
-                }
-              } catch (e) {
+              } on UserNotFoundException {
                 await showErrorDialog(
                   context,
-                  e.toString(),
+                  'User tidak ada',
+                );
+              } on WrongPasswordAuthException {
+                await showErrorDialog(
+                  context,
+                  'Password salah',
+                );
+              } on GenericAuthException {
+                await showErrorDialog(
+                  context,
+                  'Terjadi Kesalahan',
                 );
               }
             },

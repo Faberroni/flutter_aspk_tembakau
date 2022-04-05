@@ -1,11 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_aspk_tembakau/Page/inventory_page.dart';
 import 'package:flutter_aspk_tembakau/Page/login_page.dart';
 import 'package:flutter_aspk_tembakau/Page/register_page.dart';
 import 'package:flutter_aspk_tembakau/Page/verify_email_page.dart';
 import 'package:flutter_aspk_tembakau/constants/route.dart';
-import 'package:flutter_aspk_tembakau/firebase_options.dart';
+import 'package:flutter_aspk_tembakau/services/auth/auth_service.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +35,7 @@ class MyApp extends StatelessWidget {
         loginRoute: (context) => const LoginPage(),
         registerRoute: (context) => const RegisterPage(),
         inventoryRoute: (context) => const InventoryPage(),
-        verifyEmailRoute :(context) => const VerifyEmailPage(),
+        verifyEmailRoute: (context) => const VerifyEmailPage(),
       },
     );
   }
@@ -48,14 +47,13 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform),
+      future: AuthService.firebase().initialize(),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.done:
-            final user = FirebaseAuth.instance.currentUser;
+            final user = AuthService.firebase().currentUser;
             if (user != null) {
-              if (user.emailVerified) {
+              if (user.isEmailVerified) {
                 return const InventoryPage();
               } else {
                 return const VerifyEmailPage();
@@ -69,73 +67,4 @@ class HomePage extends StatelessWidget {
       },
     );
   }
-}
-
-enum MenuAction { logout }
-
-class InventoryPage extends StatefulWidget {
-  const InventoryPage({Key? key}) : super(key: key);
-
-  @override
-  State<InventoryPage> createState() => _InventoryPageState();
-}
-
-class _InventoryPageState extends State<InventoryPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Item Gudang'),
-        actions: [
-          PopupMenuButton<MenuAction>(onSelected: (value) async {
-            switch (value) {
-              case MenuAction.logout:
-                final shouldLogout = await showLogooutDialogue(context);
-                if (shouldLogout) {
-                  await FirebaseAuth.instance.signOut();
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/login/',
-                    (_) => false,
-                  );
-                }
-            }
-          }, itemBuilder: (context) {
-            return [
-              const PopupMenuItem<MenuAction>(
-                  value: MenuAction.logout, child: Text('Logout'))
-            ];
-          })
-        ],
-      ),
-      body: const Center(child: Text("Penggudangan")),
-    );
-  }
-}
-
-Future<bool> showLogooutDialogue(BuildContext context) {
-  return showDialog<bool>(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: const Text('Log out'),
-        content: const Text('Keluar dari aplikasi?'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(false);
-            },
-            child: const Text('Tidak'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(true);
-            },
-            child: const Text('Iya'),
-          ),
-        ],
-      );
-    },
-  ).then(
-    (value) => value ?? false,
-  );
 }

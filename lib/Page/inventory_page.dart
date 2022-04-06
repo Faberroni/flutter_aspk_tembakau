@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_aspk_tembakau/constants/route.dart';
 import 'package:flutter_aspk_tembakau/enums/menu_action.dart';
+import 'package:flutter_aspk_tembakau/functions/logout_dialogue.dart';
 import 'package:flutter_aspk_tembakau/services/auth/auth_service.dart';
 
 class InventoryPage extends StatefulWidget {
@@ -37,35 +38,12 @@ class _InventoryPageState extends State<InventoryPage> {
           })
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).pushNamed(newInventoryRoute);
+        },
+      ),
       body: const Center(child: Text("Penggudangan")),
     );
   }
-}
-
-Future<bool> showLogooutDialogue(BuildContext context) {
-  return showDialog<bool>(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: const Text('Log out'),
-        content: const Text('Keluar dari aplikasi?'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(false);
-            },
-            child: const Text('Tidak'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(true);
-            },
-            child: const Text('Iya'),
-          ),
-        ],
-      );
-    },
-  ).then(
-    (value) => value ?? false,
-  );
 }

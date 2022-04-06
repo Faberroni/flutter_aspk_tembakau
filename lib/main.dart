@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_aspk_tembakau/Page/inventory_page.dart';
 import 'package:flutter_aspk_tembakau/Page/login_page.dart';
+import 'package:flutter_aspk_tembakau/Page/new_inventory_page.dart';
 import 'package:flutter_aspk_tembakau/Page/register_page.dart';
 import 'package:flutter_aspk_tembakau/Page/verify_email_page.dart';
 import 'package:flutter_aspk_tembakau/constants/route.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         registerRoute: (context) => const RegisterPage(),
         inventoryRoute: (context) => const InventoryPage(),
         verifyEmailRoute: (context) => const VerifyEmailPage(),
+        newInventoryRoute : (context) => const NewInventoryPage()
       },
     );
   }

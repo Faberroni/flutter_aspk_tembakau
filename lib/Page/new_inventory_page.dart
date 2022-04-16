@@ -10,7 +10,7 @@ class NewInventoryPage extends StatefulWidget {
 }
 
 class _NewInventoryPageState extends State<NewInventoryPage> {
-  CollectionReference firestoredb =
+  CollectionReference produk =
       FirebaseFirestore.instance.collection('produk');
 
   late final TextEditingController nameController;
@@ -37,16 +37,15 @@ class _NewInventoryPageState extends State<NewInventoryPage> {
   Widget build(BuildContext context) {
     Future<void> addProduct() {
       // Call the user's CollectionReference to add a new product
-      return firestoredb.add({
-        'nama_produk': nameController.text,
-        'jumlah': quantityController.text,
-        'deskripsi': descriptionController.text,
-        'waktu': DateTime.now(),
-      }).then((value) {
-        Navigator.of(context).pop(context);
-      }).catchError((error) {
-        return showErrorDialogFirestore(context, 'Terjadi Kesalahan $error');
-      });
+      return produk
+          .add({
+            'nama_produk': nameController.text,
+            'jumlah': quantityController.text,
+            'deskripsi': descriptionController.text,
+            'waktu': DateTime.now(),
+          })
+          .then((value) => print("User Added"))
+          .catchError((error) => print("Failed to add user: $error"));
     }
 
     return Scaffold(
@@ -87,7 +86,9 @@ class _NewInventoryPageState extends State<NewInventoryPage> {
             ),
           ),
           ElevatedButton(
-              onPressed: addProduct, child: const Text('Tambahkan Produk'))
+            onPressed: addProduct,
+            child: const Text('Tambahkan Produk'),
+          ),
         ],
       ),
     );

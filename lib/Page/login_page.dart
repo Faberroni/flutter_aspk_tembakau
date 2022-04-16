@@ -32,10 +32,9 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: myGreen,
       resizeToAvoidBottomInset: true,
-      appBar: AppBar(title: const Text("Login")),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -43,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
             child: const Text(
-              "",
+              "Login Disini!",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF2661FA),
@@ -51,22 +50,59 @@ class _LoginPageState extends State<LoginPage> {
               textAlign: TextAlign.left,
             ),
           ),
-          TextField(
-            controller: _email,
-            enableSuggestions: false,
-            autocorrect: false,
-            keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(hintText: 'Masukkan Email anda!'),
-            enableIMEPersonalizedLearning: false,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              padding: const EdgeInsets.all(2.0),
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                color: Colors.white,
+              ),
+              child: TextField(
+                controller: _email,
+                enableSuggestions: false,
+                autocorrect: false,
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                  errorBorder: InputBorder.none,
+                  disabledBorder: InputBorder.none,
+                  contentPadding: EdgeInsets.all(10.0),
+                  hintText: 'Masukkan Email anda!',
+                ),
+                enableIMEPersonalizedLearning: false,
+              ),
+            ),
           ),
-          TextField(
-              controller: _password,
-              obscureText: true,
-              enableSuggestions: false,
-              autocorrect: false,
-              decoration:
-                  const InputDecoration(hintText: 'Masukkan password anda!'),
-              enableIMEPersonalizedLearning: false),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              padding: const EdgeInsets.all(2.0),
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
+                ),
+                color: Colors.white,
+              ),
+              child: TextField(
+                  controller: _password,
+                  obscureText: true,
+                  enableSuggestions: false,
+                  autocorrect: false,
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                    contentPadding: EdgeInsets.all(10.0),
+                    hintText: 'Masukkan password anda!',
+                  ),
+                  enableIMEPersonalizedLearning: false),
+            ),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -75,13 +111,14 @@ class _LoginPageState extends State<LoginPage> {
                 child: Expanded(
                   child: ElevatedButton(
                     style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(AppColors.brown),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
+                      backgroundColor:
+                          MaterialStateProperty.all(AppColors.brown),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
-                        ))),
+                        ),
+                      ),
+                    ),
                     onPressed: () async {
                       final email = _email.text;
                       final password = _password.text;
@@ -126,13 +163,13 @@ class _LoginPageState extends State<LoginPage> {
                 child: Expanded(
                   child: ElevatedButton(
                     style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.white),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
+                      backgroundColor: MaterialStateProperty.all(Colors.white),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
-                        ))),
+                        ),
+                      ),
+                    ),
                     onPressed: () {
                       Navigator.of(context).pushNamedAndRemoveUntil(
                         registerRoute,
@@ -142,7 +179,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: const Text(
                       "Buat akun baru!",
                       style: TextStyle(
-                      color: Colors.black,
+                        color: Colors.black,
                       ),
                     ),
                   ),

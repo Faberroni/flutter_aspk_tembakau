@@ -4,6 +4,7 @@ import 'package:flutter_aspk_tembakau/Page/login_page.dart';
 import 'package:flutter_aspk_tembakau/Page/new_inventory_page.dart';
 import 'package:flutter_aspk_tembakau/Page/register_page.dart';
 import 'package:flutter_aspk_tembakau/Page/verify_email_page.dart';
+import 'package:flutter_aspk_tembakau/constants/colors.dart';
 import 'package:flutter_aspk_tembakau/constants/route.dart';
 import 'package:flutter_aspk_tembakau/services/auth/auth_service.dart';
 
@@ -24,9 +25,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Roboto',
         colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.blue,
+          primarySwatch: myGreen,
         ).copyWith(
-          secondary: Colors.green,
+          secondary: Colors.amber,
         ),
         backgroundColor: Colors.white,
         textTheme: const TextTheme(bodyText2: TextStyle(color: Colors.black)),

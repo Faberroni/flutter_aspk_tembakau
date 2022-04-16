@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_aspk_tembakau/constants/colors.dart';
 import 'package:flutter_aspk_tembakau/constants/route.dart';
 import 'package:flutter_aspk_tembakau/functions/show_error_dialogue.dart';
 import 'package:flutter_aspk_tembakau/services/auth/auth_exceptions.dart';
@@ -32,65 +33,123 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Register')),
+      backgroundColor: myGreen,
+      resizeToAvoidBottomInset: true,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TextField(
-            controller: _email,
-            enableSuggestions: false,
-            autocorrect: false,
-            keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(hintText: 'Masukkan Email anda!'),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              padding: const EdgeInsets.all(2.0),
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                color: Colors.white,
+              ),
+              child: TextField(
+                controller: _email,
+                enableSuggestions: false,
+                autocorrect: false,
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                  errorBorder: InputBorder.none,
+                  disabledBorder: InputBorder.none,
+                  contentPadding: EdgeInsets.all(10.0),
+                  hintText: 'Masukkan Email anda!',
+                ),
+              ),
+            ),
           ),
-          TextField(
-            controller: _password,
-            obscureText: true,
-            enableSuggestions: false,
-            autocorrect: false,
-            decoration:
-                const InputDecoration(hintText: 'Masukkan password anda!'),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              padding: const EdgeInsets.all(2.0),
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                color: Colors.white,
+              ),
+              child: TextField(
+                controller: _password,
+                obscureText: true,
+                enableSuggestions: false,
+                autocorrect: false,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                  errorBorder: InputBorder.none,
+                  disabledBorder: InputBorder.none,
+                  contentPadding: EdgeInsets.all(10.0),
+                  hintText: 'Masukkan password anda!',
+                ),
+              ),
+            ),
           ),
-          TextButton(
-            onPressed: () async {
-              final email = _email.text;
-              final password = _password.text;
-              try {
-                await AuthService.firebase()
-                    .createUser(email: email, password: password);
-                AuthService.firebase().sendEmailVerification();
-                Navigator.of(context).pushNamed(verifyEmailRoute);
-              } on EmailAlreadyInUseAuthException {
-                await showErrorDialog(
-                    context,
-                    'Email telah digunakan',
-                  );
-              } on InvalidEmailAuthException {
-                await showErrorDialog(
-                    context,
-                    'Email invalid',
-                  );
-              } on WeakPasswordAuthException {
-                await showErrorDialog(
-                    context,
-                    'Password lemah',
-                  );
-              } on GenericAuthException {
-                await showErrorDialog(
-                  context,
-                  'Terjadi Kesalahan',
-                );
-              }
-            },
-            child: const Text('Register'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(AppColors.brown),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    ),
+                  ),
+                ),
+                onPressed: () async {
+                  final email = _email.text;
+                  final password = _password.text;
+                  try {
+                    await AuthService.firebase()
+                        .createUser(email: email, password: password);
+                    AuthService.firebase().sendEmailVerification();
+                    Navigator.of(context).pushNamed(verifyEmailRoute);
+                  } on EmailAlreadyInUseAuthException {
+                    await showErrorDialog(
+                      context,
+                      'Email telah digunakan',
+                    );
+                  } on InvalidEmailAuthException {
+                    await showErrorDialog(
+                      context,
+                      'Email invalid',
+                    );
+                  } on WeakPasswordAuthException {
+                    await showErrorDialog(
+                      context,
+                      'Password lemah',
+                    );
+                  } on GenericAuthException {
+                    await showErrorDialog(
+                      context,
+                      'Terjadi Kesalahan',
+                    );
+                  }
+                },
+                child: const Text('Register'),
+              ),
+              ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.white),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                      ),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      loginRoute,
+                      (route) => false,
+                    );
+                  },
+                  child: const Text("Login disini!"))
+            ],
           ),
-          TextButton(
-              onPressed: () {
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                  loginRoute,
-                  (route) => false,
-                );
-              },
-              child: const Text("Login disini!"))
         ],
       ),
     );

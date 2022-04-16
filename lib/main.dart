@@ -30,7 +30,11 @@ class MyApp extends StatelessWidget {
           secondary: Colors.amber,
         ),
         backgroundColor: Colors.white,
-        textTheme: const TextTheme(bodyText2: TextStyle(color: Colors.black)),
+        textTheme: const TextTheme(
+          bodyText2: TextStyle(
+            color: Colors.black,
+          ),
+        ),
       ),
       home: const HomePage(),
       routes: {
@@ -38,7 +42,7 @@ class MyApp extends StatelessWidget {
         registerRoute: (context) => const RegisterPage(),
         inventoryRoute: (context) => const InventoryPage(),
         verifyEmailRoute: (context) => const VerifyEmailPage(),
-        newInventoryRoute : (context) => const NewInventoryPage()
+        newInventoryRoute: (context) => const NewInventoryPage()
       },
     );
   }

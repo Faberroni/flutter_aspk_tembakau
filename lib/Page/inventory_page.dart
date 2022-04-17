@@ -3,6 +3,7 @@ import 'package:flutter_aspk_tembakau/constants/route.dart';
 import 'package:flutter_aspk_tembakau/enums/menu_action.dart';
 import 'package:flutter_aspk_tembakau/functions/logout_dialogue.dart';
 import 'package:flutter_aspk_tembakau/services/auth/auth_service.dart';
+import 'package:flutter_aspk_tembakau/widgets/product_information.dart';
 
 class InventoryPage extends StatefulWidget {
   const InventoryPage({Key? key}) : super(key: key);
@@ -39,11 +40,12 @@ class _InventoryPageState extends State<InventoryPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.mode_edit),
         onPressed: () {
           Navigator.of(context).pushNamed(newInventoryRoute);
         },
       ),
-      body: const Center(child: Text("Penggudangan")),
+      body: UserInformation(),
     );
   }
 }

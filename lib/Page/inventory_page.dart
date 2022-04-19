@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_aspk_tembakau/constants/colors.dart';
 import 'package:flutter_aspk_tembakau/constants/route.dart';
 import 'package:flutter_aspk_tembakau/enums/menu_action.dart';
 import 'package:flutter_aspk_tembakau/functions/logout_dialogue.dart';
@@ -16,6 +17,7 @@ class _InventoryPageState extends State<InventoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: myGreen,
       appBar: AppBar(
         title: const Text('Item Gudang'),
         actions: [
@@ -40,7 +42,9 @@ class _InventoryPageState extends State<InventoryPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.mode_edit),
+        backgroundColor: myBrown,
+        foregroundColor: Colors.black,
+        child: const Icon(Icons.add),
         onPressed: () {
           Navigator.of(context).pushNamed(newInventoryRoute);
         },

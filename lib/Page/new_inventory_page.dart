@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_aspk_tembakau/constants/colors.dart';
+import 'package:flutter_aspk_tembakau/functions/product_added.dart';
+import 'package:flutter_aspk_tembakau/functions/show_error_dialogue.dart';
 
 class NewInventoryPage extends StatefulWidget {
   const NewInventoryPage({Key? key}) : super(key: key);
@@ -40,23 +42,30 @@ class _NewInventoryPageState extends State<NewInventoryPage> {
     final size = MediaQuery.of(context).size;
     Future<void> addProduct() {
       // Call the user's CollectionReference to add a new product
-      return produk
-          .add({
-            'harga':priceController.text,
-            'nama_produk': nameController.text,
-            'jumlah': quantityController.text,
-            'deskripsi': descriptionController.text,
-            'waktu': DateTime.now(),
-          })
-          .then((value) => print("User Added"))
-          .catchError((error) => print("Failed to add user: $error"));
-
+      return produk.add({
+        'harga': priceController.text,
+        'nama_produk': nameController.text,
+        'jumlah': quantityController.text,
+        'deskripsi': descriptionController.text,
+        'waktu': DateTime.now(),
+      }).then((value) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          productAdded(context, 'produk ditambahkan'),
+        );
+        Navigator.of(context).pop();
+      }).catchError((error) {
+        showErrorDialog(context, error);
+      });
     }
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Tambah Item Baru!'),
+        backgroundColor: Colors.white,
+      ),
       extendBody: true,
-      backgroundColor: myGreen,
-      resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: true,
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
@@ -64,14 +73,14 @@ class _NewInventoryPageState extends State<NewInventoryPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Text('Isi formulir produk baru!'),
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Container(
+                  
                   padding: const EdgeInsets.all(2.0),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    color: Colors.white,
+                  decoration:  BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    color: myGreen.shade300,
                   ),
                   child: TextField(
                     decoration: const InputDecoration(
@@ -90,10 +99,11 @@ class _NewInventoryPageState extends State<NewInventoryPage> {
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Container(
+                  
                   padding: const EdgeInsets.all(2.0),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    color: Colors.white,
+                  decoration:  BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    color: myGreen.shade300,
                   ),
                   child: TextField(
                     decoration: const InputDecoration(
@@ -114,9 +124,9 @@ class _NewInventoryPageState extends State<NewInventoryPage> {
                 child: Container(
                   height: size.height * 0.12,
                   padding: const EdgeInsets.all(2.0),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    color: Colors.white,
+                  decoration:  BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    color: myGreen.shade300,
                   ),
                   child: TextField(
                     decoration: const InputDecoration(
@@ -137,9 +147,9 @@ class _NewInventoryPageState extends State<NewInventoryPage> {
                 child: Container(
                   height: size.height * 0.12,
                   padding: const EdgeInsets.all(2.0),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    color: Colors.white,
+                  decoration:  BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    color: myGreen.shade300,
                   ),
                   child: TextField(
                     decoration: const InputDecoration(
@@ -155,7 +165,6 @@ class _NewInventoryPageState extends State<NewInventoryPage> {
                   ),
                 ),
               ),
-        
               Row(
                 children: [
                   Expanded(
@@ -163,8 +172,10 @@ class _NewInventoryPageState extends State<NewInventoryPage> {
                       padding: const EdgeInsets.all(12.0),
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(Colors.white),
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          backgroundColor:
+                              MaterialStateProperty.all(myGreen),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0),
                             ),

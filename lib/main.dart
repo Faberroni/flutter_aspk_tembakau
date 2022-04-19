@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: myGreen,
         ).copyWith(
-          secondary: Colors.amber,
+          secondary: myAccent,
         ),
         backgroundColor: Colors.white,
         textTheme: const TextTheme(

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flutter_aspk_tembakau">
+    package="com.example.aspk_warehouse">
    <application
-        android:label="flutter_aspk_tembakau"
+        android:label="aspk_warehouse"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

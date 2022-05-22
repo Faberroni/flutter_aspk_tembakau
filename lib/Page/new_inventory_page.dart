@@ -60,6 +60,7 @@ class _NewInventoryPageState extends State<NewInventoryPage> {
 
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: const Text('Tambah Item Baru!'),
         backgroundColor: Colors.white,
       ),

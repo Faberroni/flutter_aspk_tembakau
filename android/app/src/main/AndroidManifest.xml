@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.aspk_warehouse">
+    package="com.example.flutter_aspk_tembakau">
+   <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="aspk_warehouse"
+        android:label="flutter_aspk_tembakau"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -21,6 +21,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
         TextButton(
           onPressed: () async {
             await AuthService.firebase().sendEmailVerification();
+            print('email sent');
           },
           child: const Text('Kirim email verifikasi'),
         ),

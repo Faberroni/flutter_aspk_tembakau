@@ -38,6 +38,7 @@ class _UserInformationState extends State<UserInformation> {
               child: SizedBox(
                 height: 150,
                 child: Card(
+                  
                   elevation: 9.0,
                   child: Column(
                     children: [

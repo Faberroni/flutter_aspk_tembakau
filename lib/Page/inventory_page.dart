@@ -19,26 +19,31 @@ class _InventoryPageState extends State<InventoryPage> {
     return Scaffold(
       backgroundColor: myGreen,
       appBar: AppBar(
+        elevation: 0,
         title: const Text('Item Gudang'),
         actions: [
-          PopupMenuButton<MenuAction>(onSelected: (value) async {
-            switch (value) {
-              case MenuAction.logout:
-                final shouldLogout = await showLogooutDialogue(context);
-                if (shouldLogout) {
-                  await AuthService.firebase().logOut();
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                    loginRoute,
-                    (_) => false,
-                  );
-                }
-            }
-          }, itemBuilder: (context) {
-            return [
-              const PopupMenuItem<MenuAction>(
-                  value: MenuAction.logout, child: Text('Logout'))
-            ];
-          })
+          PopupMenuButton<MenuAction>(
+            icon: const Icon(Icons.settings),
+            onSelected: (value) async {
+              switch (value) {
+                case MenuAction.logout:
+                  final shouldLogout = await showLogooutDialogue(context);
+                  if (shouldLogout) {
+                    await AuthService.firebase().logOut();
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      loginRoute,
+                      (_) => false,
+                    );
+                  }
+              }
+            },
+            itemBuilder: (context) {
+              return [
+                const PopupMenuItem<MenuAction>(
+                    value: MenuAction.logout, child: Text('Logout'))
+              ];
+            },
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(

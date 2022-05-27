@@ -38,16 +38,18 @@ class _LoginPageState extends State<LoginPage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          Image.asset('assets/images/login.png'),
           Container(
-            alignment: Alignment.centerLeft,
+            alignment: Alignment.center,
             padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
             child: const Text(
               "Login Disini!",
+              textAlign: TextAlign.center,
               style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF2661FA),
+                  fontWeight: FontWeight.w800,
+                  color: Color.fromARGB(255, 0, 0, 0),
                   fontSize: 24),
-              textAlign: TextAlign.left,
+            
             ),
           ),
           Padding(
@@ -111,7 +113,8 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(AppColors.brown),
+                      backgroundColor:
+                          MaterialStateProperty.all(AppColors.brown),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
@@ -122,8 +125,10 @@ class _LoginPageState extends State<LoginPage> {
                       final email = _email.text;
                       final password = _password.text;
                       try {
-                        await AuthService.firebase()
-                            .logIn(email: email, password: password);
+                        await AuthService.firebase().logIn(
+                          email: email,
+                          password: password,
+                        );
                         final user = AuthService.firebase().currentUser;
                         if (user?.isEmailVerified ?? false) {
                           Navigator.of(context).pushNamedAndRemoveUntil(

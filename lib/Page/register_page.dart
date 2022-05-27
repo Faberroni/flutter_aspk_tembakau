@@ -36,148 +36,159 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       backgroundColor: myGreen,
       resizeToAvoidBottomInset: true,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
-            child: const Text(
-              "Daftarkan Akun Baru!",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF2661FA),
-                  fontSize: 24),
-              textAlign: TextAlign.left,
+      body: SingleChildScrollView(
+        reverse: true,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Image.asset('assets/images/Character.png'),
+                Image.asset('assets/images/Ellipse.png')
+      
+              ],
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              padding: const EdgeInsets.all(2.0),
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-                color: Colors.white,
+            Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
+              child: const Text(
+                "Daftarkan Akun Baru!",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontSize: 24),
+                textAlign: TextAlign.center,
               ),
-              child: TextField(
-                controller: _email,
-                enableSuggestions: false,
-                autocorrect: false,
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                  enabledBorder: InputBorder.none,
-                  errorBorder: InputBorder.none,
-                  disabledBorder: InputBorder.none,
-                  contentPadding: EdgeInsets.all(10.0),
-                  hintText: 'Masukkan Email anda!',
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                padding: const EdgeInsets.all(2.0),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  color: Colors.white,
                 ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              padding: const EdgeInsets.all(2.0),
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-                color: Colors.white,
-              ),
-              child: TextField(
-                controller: _password,
-                obscureText: true,
-                enableSuggestions: false,
-                autocorrect: false,
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                  enabledBorder: InputBorder.none,
-                  errorBorder: InputBorder.none,
-                  disabledBorder: InputBorder.none,
-                  contentPadding: EdgeInsets.all(10.0),
-                  hintText: 'Masukkan password anda!',
-                ),
-              ),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(AppColors.brown),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                        ),
-                      ),
-                    ),
-                    onPressed: () async {
-                      final email = _email.text;
-                      final password = _password.text;
-                      try {
-                        await AuthService.firebase()
-                            .createUser(email: email, password: password);
-                        AuthService.firebase().sendEmailVerification();
-                        Navigator.of(context).pushNamed(verifyEmailRoute);
-                      } on EmailAlreadyInUseAuthException {
-                        await showErrorDialog(
-                          context,
-                          'Email telah digunakan',
-                        );
-                      } on InvalidEmailAuthException {
-                        await showErrorDialog(
-                          context,
-                          'Email invalid',
-                        );
-                      } on WeakPasswordAuthException {
-                        await showErrorDialog(
-                          context,
-                          'Password lemah',
-                        );
-                      } on GenericAuthException {
-                        await showErrorDialog(
-                          context,
-                          'Terjadi Kesalahan',
-                        );
-                      }
-                    },
-                    child: const Text('Register'),
+                child: TextField(
+                  controller: _email,
+                  enableSuggestions: false,
+                  autocorrect: false,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                    contentPadding: EdgeInsets.all(10.0),
+                    hintText: 'Masukkan Email anda!',
                   ),
                 ),
               ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.white),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                padding: const EdgeInsets.all(2.0),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  color: Colors.white,
+                ),
+                child: TextField(
+                  controller: _password,
+                  obscureText: true,
+                  enableSuggestions: false,
+                  autocorrect: false,
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                    contentPadding: EdgeInsets.all(10.0),
+                    hintText: 'Masukkan password anda!',
+                  ),
+                ),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(AppColors.brown),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                          ),
                         ),
                       ),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                        loginRoute,
-                            (route) => false,
-                      );
-                    },
-                    child: const Text(
-                      "Login disini!",
+                      onPressed: () async {
+                        final email = _email.text;
+                        final password = _password.text;
+                        try {
+                          await AuthService.firebase()
+                              .createUser(email: email, password: password);
+                          AuthService.firebase().sendEmailVerification();
+                          Navigator.of(context).pushNamed(verifyEmailRoute);
+                        } on EmailAlreadyInUseAuthException {
+                          await showErrorDialog(
+                            context,
+                            'Email telah digunakan',
+                          );
+                        } on InvalidEmailAuthException {
+                          await showErrorDialog(
+                            context,
+                            'Email invalid',
+                          );
+                        } on WeakPasswordAuthException {
+                          await showErrorDialog(
+                            context,
+                            'Password lemah',
+                          );
+                        } on GenericAuthException {
+                          await showErrorDialog(
+                            context,
+                            'Terjadi Kesalahan',
+                          );
+                        }
+                      },
+                      child: const Text('Register'),
                     ),
                   ),
                 ),
-              )
-              
-            ],
-          ),
-        ],
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Colors.white),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                          ),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                          loginRoute,
+                              (route) => false,
+                        );
+                      },
+                      child: const Text(
+                        "Login disini!",
+                      ),
+                    ),
+                  ),
+                )
+                
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

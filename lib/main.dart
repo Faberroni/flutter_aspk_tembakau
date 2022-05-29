@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_aspk_tembakau/Page/inventory_page.dart';
+import 'package:flutter_aspk_tembakau/Page/landing_page.dart';
 import 'package:flutter_aspk_tembakau/Page/login_page.dart';
 import 'package:flutter_aspk_tembakau/Page/new_inventory_page.dart';
+import 'package:flutter_aspk_tembakau/Page/new_supply_page.dart';
 import 'package:flutter_aspk_tembakau/Page/register_page.dart';
 import 'package:flutter_aspk_tembakau/Page/settings_page.dart';
+import 'package:flutter_aspk_tembakau/Page/supplier_page.dart';
 import 'package:flutter_aspk_tembakau/Page/verify_email_page.dart';
 import 'package:flutter_aspk_tembakau/constants/colors.dart';
 import 'package:flutter_aspk_tembakau/constants/route.dart';
@@ -45,6 +48,9 @@ class MyApp extends StatelessWidget {
         verifyEmailRoute: (context) => const VerifyEmailPage(),
         newInventoryRoute: (context) => const NewInventoryPage(),
         settingsRoute: (context) => const SettingsPage(),
+        landingRoute: (context) => const LandingPage(),
+        newSupplyRoute: (context) => const NewSupplyPage(),
+        supplyRoute:(context) => const SupplierPage()
       },
     );
   }
@@ -63,7 +69,7 @@ class HomePage extends StatelessWidget {
             final user = AuthService.firebase().currentUser;
             if (user != null) {
               if (user.isEmailVerified) {
-                return const InventoryPage();
+                return const LandingPage();
               } else {
                 return const VerifyEmailPage();
               }

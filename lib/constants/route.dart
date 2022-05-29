@@ -4,3 +4,6 @@ const inventoryRoute = '/inventory/';
 const verifyEmailRoute = '/verify-email/';
 const newInventoryRoute = '/new-inventory-route';
 const settingsRoute = '/settings/';
+const landingRoute = '/landing/';
+const newSupplyRoute = '/new-supply/';
+const supplyRoute = '/supply/';

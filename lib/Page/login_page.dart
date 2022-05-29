@@ -132,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                         final user = AuthService.firebase().currentUser;
                         if (user?.isEmailVerified ?? false) {
                           Navigator.of(context).pushNamedAndRemoveUntil(
-                            inventoryRoute,
+                            landingRoute,
                             (route) => false,
                           );
                         } else {

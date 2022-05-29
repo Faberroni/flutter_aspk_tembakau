@@ -52,8 +52,7 @@ class _SupplyInformationState extends State<SupplyInformation> {
                             fontSize: 21,
                           ),
                         ),
-                        subtitle: Text(data['deskripsi']),
-                        trailing: Text(data['harga']),
+                        subtitle: Text(data['alamat']),
                       ),
                       Text(dateFormatted),
                       Row(

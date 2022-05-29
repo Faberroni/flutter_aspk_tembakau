@@ -16,15 +16,14 @@ class _NewSupplyPageState extends State<NewSupplyPage> {
 
   late final TextEditingController nameController;
   late final TextEditingController quantityController;
-  late final TextEditingController descriptionController;
-  late final TextEditingController priceController;
+  late final TextEditingController addressController;
+
 
   @override
   void initState() {
-    priceController = TextEditingController();
     nameController = TextEditingController();
     quantityController = TextEditingController();
-    descriptionController = TextEditingController();
+    addressController = TextEditingController();
     super.initState();
   }
 
@@ -32,8 +31,7 @@ class _NewSupplyPageState extends State<NewSupplyPage> {
   void dispose() {
     nameController.dispose();
     quantityController.dispose();
-    descriptionController.dispose();
-    priceController.dispose();
+    addressController.dispose();
     super.dispose();
   }
 
@@ -43,10 +41,9 @@ class _NewSupplyPageState extends State<NewSupplyPage> {
     Future<void> addProduct() {
       // Call the user's CollectionReference to add a new product
       return supply.add({
-        'harga': priceController.text,
         'nama_supply': nameController.text,
         'jumlah': quantityController.text,
-        'deskripsi': descriptionController.text,
+        'alamat': addressController.text,
         'waktu': DateTime.now(),
       }).then((value) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -137,32 +134,9 @@ class _NewSupplyPageState extends State<NewSupplyPage> {
                       errorBorder: InputBorder.none,
                       disabledBorder: InputBorder.none,
                       contentPadding: EdgeInsets.all(10.0),
-                      labelText: 'Harga supply',
+                      labelText: 'Alamat supply',
                     ),
-                    controller: priceController,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  height: size.height * 0.12,
-                  padding: const EdgeInsets.all(2.0),
-                  decoration:  BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(20)),
-                    color: myGreen.shade300,
-                  ),
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
-                      contentPadding: EdgeInsets.all(10.0),
-                      labelText: 'Deskripsi supply',
-                    ),
-                    controller: descriptionController,
+                    controller: addressController,
                   ),
                 ),
               ),

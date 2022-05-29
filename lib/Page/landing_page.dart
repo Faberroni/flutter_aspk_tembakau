@@ -12,53 +12,78 @@ class LandingPage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          const Text(
-            'Masuk Sebagai',
-            style: TextStyle(
-              fontSize: 32,
-              fontFamily: 'assets/fonts/Roboto-Bold.ttf',
-            ),
-          ),
-          Image.asset('assets/images/amico.png'),
-          ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.white),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-              ),
-            ),
-            onPressed: () {
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                inventoryRoute,
-                (route) => false,
-              );
-            },
-            child: const Text(
-              "Pegawai",
+          const Padding(
+            padding: EdgeInsets.all(4.0),
+            child: Text(
+              'Masuk Sebagai',
               style: TextStyle(
-                color: Colors.black,
+                fontSize: 32,
+                fontWeight: FontWeight.w800,
+                fontFamily: 'assets/fonts/Roboto-Bold.ttf',
               ),
             ),
           ),
-          ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(myBrown),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset('assets/images/amico.png'),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: SizedBox(
+              height: 40,
+              width: 200,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.white),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20),
+                      ),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    inventoryRoute,
+                    (route) => false,
+                  );
+                },
+                child: const Text(
+                  "Pegawai",
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ),
-            onPressed: () {
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil(supplyRoute, (route) => false);
-            },
-            child: const Text(
-              "Supplier",
-              style: TextStyle(
-                color: Colors.black,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: SizedBox(
+              width: 200,
+              height: 40,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(myBrown),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20),
+                      ),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushNamedAndRemoveUntil(supplyRoute, (route) => false);
+                },
+                child: const Text(
+                  "Supplier",
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
               ),
             ),
           ),

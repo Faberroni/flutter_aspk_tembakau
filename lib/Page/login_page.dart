@@ -49,7 +49,6 @@ class _LoginPageState extends State<LoginPage> {
                   fontWeight: FontWeight.w800,
                   color: Color.fromARGB(255, 0, 0, 0),
                   fontSize: 24),
-            
             ),
           ),
           Padding(

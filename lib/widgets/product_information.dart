@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class UserInformation extends StatefulWidget {
+  const UserInformation({Key? key}) : super(key: key);
+
   @override
   _UserInformationState createState() => _UserInformationState();
 }

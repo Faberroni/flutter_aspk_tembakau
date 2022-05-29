@@ -44,6 +44,15 @@ class _InventoryPageState extends State<InventoryPage> {
               ];
             },
           ),
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                settingsRoute,
+                (route) => false,
+              );
+            },
+            icon: const Icon(Icons.settings),
+          )
         ],
       ),
       floatingActionButton: FloatingActionButton(
